@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Input field character Count</title>
+</head>
+<body>
+	<h1>Input field character count using simple javascript DOM</h1>
+	<!-- input text sms -->
+	<textarea onkeyup="calculateCount()" name="" id="inputCharacter" cols="30" rows="10" placeholder="type message"></textarea>
+	<!-- display the remain character -->
+	<div id="remainCharacter"></div>
+	<hr>
+	<!-- input text sms for multiple sms-->
+	<textarea onkeyup="calculateCountMultiple()" name="" id="inputCharacterMultiple" cols="30" rows="10" placeholder="type message"></textarea>
+	<!-- display sms and remain character info -->
+	<div id="remainCharacterMultiple"></div>
+	<hr>
+	<script>
+		// number of character each sms
+		n = 128;
+		function calculateCount() {
+			// get value from input text area using id
+			input_character = document.getElementById('inputCharacter')
+			// remaining character numbers will show here
+			remain_character = document.getElementById('remainCharacter')
+			// reformat sms if it exits the max character
+			input_character.value = input_character.value.substring(0,n);
+			// display how many character remains
+			remain_character.innerHTML = n - input_character.value.length;
+		}
+		function calculateCountMultiple() {
+			// get value from input text area using id
+			input_character = document.getElementById('inputCharacterMultiple')
+			// remaining character numbers will show here
+			remain_character = document.getElementById('remainCharacterMultiple')
+			// conunt number of minimum sms need to send
+			number_of_sms = parseInt(1+parseInt(input_character.value.length)/n) 
+			// count remaining number of letters to add extra sms
+			num_of_character_remaining_on_this_message = n - parseInt(input_character.value.length)%n
+			// display result
+			remain_character.innerHTML =  num_of_character_remaining_on_this_message + "/" + number_of_sms;
+		}
+	</script>
+</body>
+</html>
